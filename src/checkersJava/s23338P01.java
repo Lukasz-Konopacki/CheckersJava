@@ -5,19 +5,14 @@ import java.util.Scanner;
 public class s23338P01 {
 		public static void main(String[] args) {
 			long white1 = 0b101000001_101000011_101000101_101000111_101001110_101001100L;
-			long white2 = 0b101001000_101001010_111010001_101010011_101010101_101010111L;
+			long white2 = 0b101001000_101001010_101010001_101010011_101010101_101010111L;
 			long black1 = 0b100111000_100111010_100111100_100111110_100110111_100110101L;
-			long black2 = 0b100110011_110110001_100101000_100101010_100101100_100101110L;
+			long black2 = 0b100110011_100110001_100101000_100101010_100101100_100101110L;
 			
 			boolean GameOver = false;
 			boolean IsWhiteMove = true;
 			boolean IsPossibleToCapture = false;
 			Scanner scan = new Scanner(System.in);
-			
-			
-			white2 = giveNewPosition(white2, 1, 2, 0,3);
-			black2 = giveNewPosition(black2, 0, 5, 1,4);
-			black2 = giveNewPosition(black2, 2, 5, 3,4);
 			
 			if(IsWhiteMove) {
 				if(checkCapture(white1, white2, black1, black2) || checkCapture(white2, white1, black1,black2)) {
@@ -32,7 +27,6 @@ public class s23338P01 {
 					IsPossibleToCapture = true;
 				}
 				else {
-					System.out.println("Czarne nie maja bicia");
 					IsPossibleToCapture = false;
 				}
 			}	
@@ -69,7 +63,6 @@ public class s23338P01 {
 						IsPossibleToCapture = true;
 					}
 					else {
-						System.out.println("Czarne nie maja bicia");
 						IsPossibleToCapture = false;
 					}
 				}	
@@ -82,7 +75,6 @@ public class s23338P01 {
 						if(checkFigurePos(white1, Xstart, Ystart) || checkFigurePos(white2, Xstart, Ystart)  || checkFigurePos(black1, Xstart, Ystart)  || checkFigurePos(black2, Xstart, Ystart)) {
 								//Sprawdzenie czy figura jest pionkiem czy dama
 								if(checkTypeOfFigure(white1, Xstart,Ystart) || checkTypeOfFigure(white2, Xstart,Ystart) || checkTypeOfFigure(black1, Xstart,Ystart) || checkTypeOfFigure(black2, Xstart,Ystart)) {
-									System.out.println("Figura jest Pionkiem");
 									//Sprawdzamy czy gracz porusza pionkiem dobrego koloru
 									if((checkFigurePos(white1, Xstart, Ystart) || checkFigurePos(white2, Xstart, Ystart)) && IsWhiteMove) {
 										//sprawdzenie czy gracz wykonal bicie
@@ -96,11 +88,10 @@ public class s23338P01 {
 												else if(checkFigurePos(black2, (Xstart + Xend)/2, (Ystart + Yend)/2)) {
 													black2 = exludeFigure(black2,(Xstart + Xend)/2,(Ystart + Yend)/2);
 												}
-												System.out.println("Sprawdzanie dalszego bicia");
 												if(checkCaptureOnPosition(white1, white2, black1, black2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(white1, white2, black1, black2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Bia³e musza biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -117,7 +108,6 @@ public class s23338P01 {
 															}
 														}
 														else{
-															System.out.println("z³e dane mo¿liwe jest dalsze bicie");
 															Xend = Xstart;
 															Yend = Ystart;
 														}
@@ -138,9 +128,9 @@ public class s23338P01 {
 													black2 = exludeFigure(black2,(Xstart + Xend)/2,(Ystart + Yend)/2);
 												}
 												if(checkCaptureOnPosition(white2, white1, black1, black2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(white2, white1, black1, black2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Bia³e musz¹ biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -157,7 +147,6 @@ public class s23338P01 {
 															}
 														}
 														else{
-															System.out.println("z³e dane mo¿liwe jest dalsze bicie");
 															Xend = Xstart;
 															Yend = Ystart;
 														}
@@ -202,9 +191,9 @@ public class s23338P01 {
 													white2 = exludeFigure(white2,(Xstart + Xend)/2,(Ystart + Yend)/2);
 												}
 												if(checkCaptureOnPosition(black1, black2, white1, white2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(black1, black2, white1, white2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Czarne musz¹ biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -241,9 +230,9 @@ public class s23338P01 {
 													white2 = exludeFigure(white2,(Xstart + Xend)/2,(Ystart + Yend)/2);
 												}
 												if(checkCaptureOnPosition(black2, black1, white1, white2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(black2, black1, white1, white2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Czarne musza biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -297,7 +286,6 @@ public class s23338P01 {
 									}
 								}
 								else {
-									System.out.println("figura jest dama");
 									//Sprawdzamy czy gracz dama pionkiem dobrego koloru
 									if((checkFigurePos(white1, Xstart, Ystart) || checkFigurePos(white2, Xstart, Ystart)) && IsWhiteMove) {
 										//sprawdzenie czy gracz wykonal bicie
@@ -315,9 +303,9 @@ public class s23338P01 {
 													black2 = exludeFigure(black2,XtoExlude,YtoExlude);
 												}
 												if(checkCaptureOnPosition(white1, white2, black1, black2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(white1, white2, black1, black2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Bia³e musz¹ biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -360,9 +348,9 @@ public class s23338P01 {
 													black2 = exludeFigure(black2,XtoExlude,YtoExlude);
 												}
 												if(checkCaptureOnPosition(white2, white1, black1, black2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(white2, white1, black1, black2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Bia³e musz¹ biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -430,9 +418,9 @@ public class s23338P01 {
 													white2 = exludeFigure(white2,XtoExlude,YtoExlude);
 												}
 												if(checkCaptureOnPosition(black1, black2, white1, white2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(black1, black2, white1, white2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Bia³e musz¹ biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -457,10 +445,10 @@ public class s23338P01 {
 															Yend = Ystart;
 														}
 													}
-													IsWhiteMove = false;												
+													IsWhiteMove = true;												
 												}
 												else {
-													IsWhiteMove = false;
+													IsWhiteMove = true;
 												}
 											}
 											else if(checkFigurePos(black2, Xstart, Ystart)) {
@@ -471,13 +459,13 @@ public class s23338P01 {
 												if(checkFigurePos(white1, XtoExlude, YtoExlude)) {
 													white1 = exludeFigure(white1, XtoExlude,YtoExlude);
 												}
-												else if(checkFigurePos(black2, XtoExlude, YtoExlude)) {
+												else if(checkFigurePos(white2, XtoExlude, YtoExlude)) {
 													white2 = exludeFigure(white2,XtoExlude,YtoExlude);
 												}
 												if(checkCaptureOnPosition(black2, black1, white1, white2, Xend, Yend)) {
-													System.out.println("Dostepne dalsze bicie");
 													while(checkCaptureOnPosition(black2, black1, white1, white2, Xend, Yend)){
 														drawBoard(white1, white2,black1,black2);
+														System.out.println("Czarne musz¹ biæ dalej");
 														Xstart = Xend;
 														Ystart = Yend;
 														System.out.println("Podaj pozycje X na która przesun¹æ figure: ");
@@ -502,10 +490,10 @@ public class s23338P01 {
 															Yend = Ystart;
 														}
 													}
-													IsWhiteMove = false;
+													IsWhiteMove = true;
 												}
 												else {
-													IsWhiteMove = false;
+													IsWhiteMove = true;
 												}
 											}
 										}
@@ -546,13 +534,74 @@ public class s23338P01 {
 				else {
 					System.out.println("Na polu (X:"+ Xend + ", Y:" + Yend + ") znajduje sie inna figura");
 				}
+				if(ChangeInToQueen(white1) != -1) {
+					System.out.println("Zmian pionka w dame");
+					white1 = ChangeInToQueen(white1);
+				}
+				if(ChangeInToQueen(white2) != -1) {
+					white2 = ChangeInToQueen(white2);
+				}
+				if(ChangeInToQueen(black1) != -1) {
+					black1 = ChangeInToQueen(black1);
+				}
+				if(ChangeInToQueen(black2) != -1) {
+					black2 = ChangeInToQueen(black2);
+				}
+				
+				if(CheckEnd(white1) && CheckEnd(white2)) {
+					GameOver = true;
+				}
+				if(CheckEnd(black1) && CheckEnd(black2)) {
+					GameOver = true;
+				}
+				
 			}	
 			scan.close();	
 		}
 		
+		
+		//Sprawdzenie czy pionki sa zbite
+		public static boolean CheckEnd(long figure) {
+			for(int i=0; i<=5; i++) {
+				if(((figure >> 8) & 0b1L) == 1) {
+					return false;
+				}
+					figure = figure >> 9;
+			}
+			return true;
+		}
+		
 		//Funkcja zmienia pionka w dame jestli dojdzie do linki krolewskiej
-		public static void ChangeInToQueen() {
-			
+		public static long ChangeInToQueen(long figures) {
+			long endToAdd = 0;
+			for(int i=0; i <= 5; i++) {
+				if((figures & 0b1000000) >> 6 == 1) {
+					if((figures & 0b111000L)>>3 == 7) {
+						figures =  figures | 0b10000000;
+						for(int j=0; j <i; j++) {
+							figures = figures << 9;
+						}
+						endToAdd = endToAdd >> 9;
+						figures += endToAdd;
+						return figures;
+					}
+				}
+				else {
+					if((figures & 0b111000L)>>3 == 0 && (figures & 0b111) != 0) {
+						figures =  figures | 0b10000000;
+						for(int j=0; j <i; j++) {
+							figures = figures << 9;
+						}
+						endToAdd = endToAdd >> 9;
+						figures += endToAdd;
+						return figures;
+					}
+				}
+					endToAdd += figures & 0b111111111;
+					endToAdd = endToAdd << 9;
+					figures = figures >> 9;
+			}
+			return -1;
 		}
 		
 		//Funkcja sprawdza czy mozna wykonoc ruch dama
@@ -568,7 +617,6 @@ public class s23338P01 {
 							int n = 1;
 							while(Xstart+n < Xend) {
 								if(checkFigurePos(figures,Xstart+n,Ystart+n) || checkFigurePos(SameColorFigures,Xstart+n,Ystart+n) || checkFigurePos(secondColor1,Xstart+n,Ystart+n) || checkFigurePos(secondColor2,Xstart+n,Ystart+n)) {
-									System.out.println("Pomiedzy polami znajduje sie figura");
 									return false;
 								}
 								n++;
@@ -579,7 +627,6 @@ public class s23338P01 {
 							int n = 1;
 							while(Ystart+n < Yend) {
 								if(checkFigurePos(figures,Xstart-n,Ystart+n) || checkFigurePos(SameColorFigures,Xstart-n,Ystart+n) || checkFigurePos(secondColor1,Xstart-n,Ystart+n) || checkFigurePos(secondColor2,Xstart-n,Ystart+n)) {
-									System.out.println("Pomiedzy polami znajduje sie figura");
 									return false;
 								}
 								n++;
@@ -590,7 +637,6 @@ public class s23338P01 {
 							int n = 1;
 							while(Ystart-n > Yend) {
 								if(checkFigurePos(figures,Xstart-n,Ystart-n) || checkFigurePos(SameColorFigures,Xstart-n,Ystart-n) || checkFigurePos(secondColor1,Xstart-n,Ystart-n) || checkFigurePos(secondColor2,Xstart-n,Ystart-n)) {
-									System.out.println("Pomiedzy polami znajduje sie figura");
 									return false;
 								}
 								n++;
@@ -601,7 +647,6 @@ public class s23338P01 {
 							int n = 1;
 							while(Xstart+n < Xend) {
 								if(checkFigurePos(figures,Xstart+n,Ystart-n) || checkFigurePos(SameColorFigures,Xstart+n,Ystart-n) || checkFigurePos(secondColor1,Xstart+n,Ystart-n) || checkFigurePos(secondColor2,Xstart+n,Ystart-n)) {
-									System.out.println("Pomiedzy polami znajduje sie figura");
 									return false;
 								}
 								n++;
@@ -617,85 +662,73 @@ public class s23338P01 {
 		
 		//funkcja sprawdza czy dama moze dokonac bicia
 		public static boolean checkQueenCapture(long figures, int Xstart, int Ystart, int Xend,int Yend, long SameColorFigures, long secondColor1,long secondColor2){	
-			if(Math.abs(Xstart-Xend) == Math.abs(Ystart - Yend)) {	
-				if(Xend-Xstart > 0 && Yend-Ystart > 0) {
-					System.out.println("Prawa dó³");
-					for(int i=1; i < Math.abs(Xend-Xstart); i++) {
-						if(!(checkFigurePos(secondColor1, Xstart+i, Ystart+i) || checkFigurePos(secondColor2, Xstart+i, Ystart+i) || checkFigurePos(figures, Xstart+i, Ystart+i) || checkFigurePos(SameColorFigures, Xstart+i, Ystart+i))) {
-							System.out.println("Pole puste sprawdzanie dalej");
-						}
-						else {
-							System.out.println("Pole zajête");
-							if(checkFigurePos(secondColor1, Xend-1, Yend-1) || checkFigurePos(secondColor2, Xend-1,  Yend-1)) {
-								System.out.println("przedostatnie pole");
-								return true;
+			if(Math.abs(Xstart-Xend) == Math.abs(Ystart - Yend)) {
+				if (!checkFigurePos(figures, Xend, Yend) && !checkFigurePos(SameColorFigures, Xend, Yend) && !checkFigurePos(secondColor1, Xend, Yend) && !checkFigurePos(secondColor2, Xend, Yend)) {
+					if(Xend-Xstart > 0 && Yend-Ystart > 0) {
+						for(int i=1; i < Math.abs(Xend-Xstart); i++) {
+							if(!(checkFigurePos(secondColor1, Xstart+i, Ystart+i) || checkFigurePos(secondColor2, Xstart+i, Ystart+i) || checkFigurePos(figures, Xstart+i, Ystart+i) || checkFigurePos(SameColorFigures, Xstart+i, Ystart+i))) {
+
 							}
 							else {
-								return false;
+
+								if(checkFigurePos(secondColor1, Xend-1, Yend-1) || checkFigurePos(secondColor2, Xend-1,  Yend-1)) {
+									return true;
+								}
+								else {
+									return false;
+								}
 							}
 						}
 					}
-				}
-				else if(Xend-Xstart > 0 && Yend-Ystart < 0) {
-					System.out.println("Prawa góra");
-					for(int i=1; i < Math.abs(Xend-Xstart); i++) {
-						if(!(checkFigurePos(secondColor1, Xstart+i, Ystart-i) || checkFigurePos(secondColor2, Xstart+i, Ystart-i)|| checkFigurePos(figures, Xstart+i, Ystart-i) || checkFigurePos(SameColorFigures, Xstart+i, Ystart-i))) {
-							System.out.println("Pole puste sprawdzanie dalej");
-						}
-						else {
-							System.out.println("Pole zajête");
-							if(checkFigurePos(secondColor1, Xend-1, Yend+1) || checkFigurePos(secondColor2, Xend-1,  Yend+1)) {
-								System.out.println("przedostatnie pole");
-								return true;
+					else if(Xend-Xstart > 0 && Yend-Ystart < 0) {
+						for(int i=1; i < Math.abs(Xend-Xstart); i++) {
+							if(!(checkFigurePos(secondColor1, Xstart+i, Ystart-i) || checkFigurePos(secondColor2, Xstart+i, Ystart-i)|| checkFigurePos(figures, Xstart+i, Ystart-i) || checkFigurePos(SameColorFigures, Xstart+i, Ystart-i))) {
 							}
 							else {
-								return false;
+								if(checkFigurePos(secondColor1, Xend-1, Yend+1) || checkFigurePos(secondColor2, Xend-1,  Yend+1)) {
+									return true;
+								}
+								else {
+									return false;
+								}
 							}
 						}
 					}
-				}
-				else if(Xend-Xstart < 0 && Yend-Ystart < 0) {
-					System.out.println("lewa góra");
-					for(int i=1; i < Math.abs(Xend-Xstart); i++) {
-						if(!(checkFigurePos(secondColor1, Xstart-i, Ystart-i) || checkFigurePos(secondColor2, Xstart-i, Ystart-i) || checkFigurePos(figures, Xstart-i, Ystart-i) || checkFigurePos(SameColorFigures, Xstart-i, Ystart-i))) {
-							System.out.println("Pole puste sprawdzanie dalej");
-						}
-						else {
-							System.out.println("Pole zajête");
-							if(checkFigurePos(secondColor1, Xend+1, Yend+1) || checkFigurePos(secondColor2, Xend+1,  Yend+1)) {
-								System.out.println("przedostatnie pole");
-								return true;
+					else if(Xend-Xstart < 0 && Yend-Ystart < 0) {
+						for(int i=1; i < Math.abs(Xend-Xstart); i++) {
+							if(!(checkFigurePos(secondColor1, Xstart-i, Ystart-i) || checkFigurePos(secondColor2, Xstart-i, Ystart-i) || checkFigurePos(figures, Xstart-i, Ystart-i) || checkFigurePos(SameColorFigures, Xstart-i, Ystart-i))) {
 							}
 							else {
-								return false;
+								if(checkFigurePos(secondColor1, Xend+1, Yend+1) || checkFigurePos(secondColor2, Xend+1,  Yend+1)) {
+									return true;
+								}
+								else {
+									return false;
+								}
 							}
 						}
 					}
-				}
-				else if(Xend-Xstart < 0 && Yend-Ystart > 0) {
-					System.out.println("lewa dó³");
-					for(int i=1; i < Math.abs(Xend-Xstart); i++) {
-						if(!(checkFigurePos(secondColor1, Xstart-i, Ystart+i) || checkFigurePos(secondColor2, Xstart-i, Ystart+i))) {
-							System.out.println("Pole puste sprawdzanie dalej");
-						}
-						else {
-							System.out.println("Pole zajête");
-							if(checkFigurePos(secondColor1, Xend+1, Yend-1) || checkFigurePos(secondColor2, Xend+1,  Yend-1)) {
-								System.out.println("przedostatnie pole");
-								return true;
+					else if(Xend-Xstart < 0 && Yend-Ystart > 0) {
+						for(int i=1; i < Math.abs(Xend-Xstart); i++) {
+							if(!(checkFigurePos(secondColor1, Xstart-i, Ystart+i) || checkFigurePos(secondColor2, Xstart-i, Ystart+i))) {
 							}
 							else {
-								return false;
+								if(checkFigurePos(secondColor1, Xend+1, Yend-1) || checkFigurePos(secondColor2, Xend+1,  Yend-1)) {
+									return true;
+								}
+								else {
+									return false;
+								}
 							}
 						}
 					}
+					else {
+						return false;
+					}
 				}
-				else {
-					return false;
 				}
+			return false;
 			}
-				return false;
-		}
 		
 		//Funkcja oznacza pionka jako zbitego
 		public static long exludeFigure(long figures,int Xpos,int Ypos) {
@@ -725,6 +758,7 @@ public class s23338P01 {
 		
 		//Funkcja sprawdza czy z  figura na pozycji X Y ma dostepne bicie
 		public static boolean checkCaptureOnPosition(long FiguresToCheck, long SameColorFigures, long secondColor1, long  secondColor2, int posX, int posY) {
+			long figuresCopy = FiguresToCheck;
 			for (int i = 0; i <= 5; i++) {
 				if((FiguresToCheck & 0b111L) == posX && (FiguresToCheck & 0b111000L)>>3 == posY) {
 					//Sprawdzenie czy mamy pionka czy dame
@@ -734,11 +768,10 @@ public class s23338P01 {
 							//sprawdzanie czy pole x+2 y+2 jest wolne
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
+									if(!checkFigurePos(figuresCopy, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 											//sprawdzenie czy bicie nie konczy sie poza plansza
 											if((FiguresToCheck & 0b111L)+2 >= 0 && (FiguresToCheck & 0b111L)+2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)+2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)+2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja1");
 												return true;
 											}
 										}
@@ -749,10 +782,9 @@ public class s23338P01 {
 						if(checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))+1,((int)(FiguresToCheck & 0b111000L)>>3)-1) || checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))+1,((int)(FiguresToCheck & 0b111000L)>>3)-1)) {
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
+									if(!checkFigurePos(figuresCopy, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 											if((FiguresToCheck & 0b111L)+2 >= 0 && (FiguresToCheck & 0b111L)+2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)-2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)-2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja2");
 												return true;
 											}
 										}
@@ -763,10 +795,9 @@ public class s23338P01 {
 						if(checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)-1) || checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)-1)) {
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
+									if(!checkFigurePos(figuresCopy, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 											if((FiguresToCheck & 0b111L)-2 >= 0 && (FiguresToCheck & 0b111L)-2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)-2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)-2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja3");
 												return true;
 											}
 										}
@@ -777,10 +808,9 @@ public class s23338P01 {
 						if(checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)+1) || checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)+1)) {
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
+									if(!checkFigurePos(figuresCopy, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 											if((FiguresToCheck & 0b111L)-2 >= 0 && (FiguresToCheck & 0b111L)-2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)+2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)+2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja4");
 												return true;
 											}
 										}
@@ -795,10 +825,9 @@ public class s23338P01 {
 						//Sprawdzenie czy na pierwszej przekatnej nie ma bicia
 						while((FiguresToCheck & 0b111L)+n < 7 && ((FiguresToCheck & 0b111000L)>>3)+n < 7) {
 							//sprawdzenie czy jakies z pul jest zajete
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
+							if(checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
 								//sprawdzenie czy pole za zajetym polem jest puste
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1)) {
-									System.out.println("Mo¿liwe bicie dama opcja1");
 									return true;
 								}
 							}
@@ -806,9 +835,8 @@ public class s23338P01 {
 						}
 						n=1;
 						while((FiguresToCheck & 0b111L)-n > 0 && ((FiguresToCheck & 0b111000L)>>3)+n < 7) {
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
+							if(checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1)) {
-									System.out.println("Mo¿liwe bicie dama opcja2");
 									return true;
 								}
 							}
@@ -816,9 +844,8 @@ public class s23338P01 {
 						}
 						n=1;
 						while((FiguresToCheck & 0b111L)-n > 0 && ((FiguresToCheck & 0b111000L)>>3)-n > 0) {
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
+							if(checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1)) {
-									System.out.println("Mo¿liwe bicie dama opcja3");
 									return true;
 								}
 							}
@@ -826,15 +853,13 @@ public class s23338P01 {
 						}
 						n=1;
 						while((FiguresToCheck & 0b111L)+n < 7 && ((FiguresToCheck & 0b111000L)>>3)-n > 0) {
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
+							if(checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1)) {
-									System.out.println("Mo¿liwe bicie dama opcja4");
 									return true;
 								}
 							}
 							n++;
 						}
-						System.out.println("Brak opcji dla damy");
 					}
 				}
 				
@@ -845,7 +870,8 @@ public class s23338P01 {
 		
 		//Funkcja Spawdzajaca czy jest dostepne bicie
 		public static boolean checkCapture(long FiguresToCheck, long SameColorFigures, long secondColor1, long  secondColor2) {
-				for (int i = 0; i <= 5; i++) {
+			long figureCopy = FiguresToCheck;	
+			for (int i = 0; i <= 5; i++) {
 					
 					//Sprawdzenie czy mamy pionka czy dame
 					if((FiguresToCheck &0b10000000)>> 7 == 0 ) {
@@ -854,11 +880,10 @@ public class s23338P01 {
 							//sprawdzanie czy pole x+2 y+2 jest wolne
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
+									if(!checkFigurePos(figureCopy, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 											//sprawdzenie czy bicie nie konczy sie poza plansza
 											if((FiguresToCheck & 0b111L)+2 >= 0 && (FiguresToCheck & 0b111L)+2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)+2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)+2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja1");
 												return true;
 											}
 										}
@@ -869,10 +894,9 @@ public class s23338P01 {
 						if(checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))+1,((int)(FiguresToCheck & 0b111000L)>>3)-1) || checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))+1,((int)(FiguresToCheck & 0b111000L)>>3)-1)) {
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
+									if(!checkFigurePos(figureCopy, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))+2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 											if((FiguresToCheck & 0b111L)+2 >= 0 && (FiguresToCheck & 0b111L)+2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)-2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)-2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja2");
 												return true;
 											}
 										}
@@ -883,10 +907,9 @@ public class s23338P01 {
 						if(checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)-1) || checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)-1)) {
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
+									if(!checkFigurePos(figureCopy, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)-2)) {
 											if((FiguresToCheck & 0b111L)-2 >= 0 && (FiguresToCheck & 0b111L)-2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)-2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)-2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja3");
 												return true;
 											}
 										}
@@ -897,10 +920,9 @@ public class s23338P01 {
 						if(checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)+1) || checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-1,((int)(FiguresToCheck & 0b111000L)>>3)+1)) {
 							if(!checkFigurePos(secondColor1, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 								if(!checkFigurePos(secondColor2, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
-									if(!checkFigurePos(FiguresToCheck, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
+									if(!checkFigurePos(figureCopy, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 										if(!checkFigurePos(SameColorFigures, ((int)(FiguresToCheck & 0b111L))-2,((int)(FiguresToCheck & 0b111000L)>>3)+2)) {
 											if((FiguresToCheck & 0b111L)-2 >= 0 && (FiguresToCheck & 0b111L)-2 <= 7 && ((FiguresToCheck & 0b111000L)>>3)+2 >= 0 && ((FiguresToCheck & 0b111000L)>>3)+2 <= 7) {
-												System.out.println("Mo¿liwe bicie opcja4");
 												return true;
 											}
 										}
@@ -915,10 +937,9 @@ public class s23338P01 {
 						//Sprawdzenie czy na pierwszej przekatnej nie ma bicia
 						while((FiguresToCheck & 0b111L)+n < 7 && ((FiguresToCheck & 0b111000L)>>3)+n < 7) {
 							//sprawdzenie czy jakies z pul jest zajete
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
+							if(checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
 								//sprawdzenie czy pole za zajetym polem jest puste
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1)) {
-									System.out.println("Mo¿liwe bicie dama opcja1");
 									return true;
 								}
 							}
@@ -926,9 +947,8 @@ public class s23338P01 {
 						}
 						n=1;
 						while((FiguresToCheck & 0b111L)-n > 0 && ((FiguresToCheck & 0b111000L)>>3)+n < 7) {
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
+							if( checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)+n)) {
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)+n+1)) {
-									System.out.println("Mo¿liwe bicie dama opcja2");
 									return true;
 								}
 							}
@@ -936,9 +956,8 @@ public class s23338P01 {
 						}
 						n=1;
 						while((FiguresToCheck & 0b111L)-n > 0 && ((FiguresToCheck & 0b111000L)>>3)-n > 0) {
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
+							if( checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)-n-1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1)) {
-									System.out.println("Mo¿liwe bicie dama opcja3");
 									return true;
 								}
 							}
@@ -946,15 +965,13 @@ public class s23338P01 {
 						}
 						n=1;
 						while((FiguresToCheck & 0b111L)+n < 7 && ((FiguresToCheck & 0b111000L)>>3)-n > 0) {
-							if(checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
+							if(checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n) || checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n,(int)((FiguresToCheck & 0b111000L)>>3)-n)) {
 								if(!checkFigurePos(FiguresToCheck,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(SameColorFigures,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor1,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1) && !checkFigurePos(secondColor2,(int)(FiguresToCheck & 0b111L)+n+1,(int)((FiguresToCheck & 0b111000L)>>3)-n-1)) {
-									System.out.println("Mo¿liwe bicie dama opcja4");
 									return true;
 								}
 							}
 							n++;
 						}
-						System.out.println("Brak opcji dla damy");
 					}
 					FiguresToCheck = FiguresToCheck >> 9;
 				}
